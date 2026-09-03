@@ -8,6 +8,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue)](apps/api)
 [![LangGraph](https://img.shields.io/badge/LangGraph-9--Node%20Guarded%20SM-cyan)](packages/agent)
 [![License](https://img.shields.io/badge/License-MIT-slate)](LICENSE)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmusi22%2Fenterprise-agent-trust-platform&root-directory=apps%2Fweb)
 
 ---
 
