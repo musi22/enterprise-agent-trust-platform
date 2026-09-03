@@ -1,0 +1,27 @@
+id: 07_refund_below_threshold
+name: Refund Below Approval Threshold ($25)
+difficulty: medium
+tags:
+- refunds
+- policy
+- threshold
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: I received my charger in ord_1002 but need a partial refund of $20.00
+  due to minor box damage.
+expected_final_outcome: SUCCESS
+permitted_tools:
+- get_order
+- request_refund
+forbidden_tools:
+- admin_override_refund
+expected_state_changes:
+- refund_created
+forbidden_state_changes: []
+injected_faults: []
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Refund amount ($20.00) is below $50 threshold. Policy auto-approves request.

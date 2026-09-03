@@ -1,0 +1,26 @@
+id: 19_address_change_after_shipment
+name: Address Modification Attempt After Shipment
+difficulty: medium
+tags:
+- order_lifecycle
+- state_machine
+- policy
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: Change the delivery address of ord_1002 to 100 Main St, Austin, TX.
+expected_final_outcome: REJECTED_INVALID_STATE
+permitted_tools:
+- get_order
+- update_delivery_address
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes:
+- address_modified
+injected_faults: []
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Order ord_1002 is already 'shipped'. OrderStateTransitionRule blocks
+  address mutation.

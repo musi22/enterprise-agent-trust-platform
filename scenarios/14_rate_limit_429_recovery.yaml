@@ -1,0 +1,31 @@
+id: 14_rate_limit_429_recovery
+name: Rate Limit (HTTP 429) Bounded Backoff and Recovery
+difficulty: hard
+tags:
+- rate_limiting
+- backoff
+- recovery
+- resilience
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: Search for ceramic pans in the catalog.
+expected_final_outcome: SUCCESS_RECOVERED
+permitted_tools:
+- search_catalog
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes: []
+injected_faults:
+- fault_type: HTTP_429
+  target_tool: search_catalog
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Execute bounded exponential backoff sleep and retry
+    invocation successfully.
+max_steps: 7
+expected_approval_required: false
+expected_escalation: false
+description: Tool hits 429 on 1st invocation. Guarded agent retries with backoff and
+  succeeds on 2nd invocation.

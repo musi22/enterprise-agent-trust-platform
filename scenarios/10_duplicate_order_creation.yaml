@@ -1,0 +1,32 @@
+id: 10_duplicate_order_creation
+name: Duplicate Order-Creation Event Deduplication
+difficulty: hard
+tags:
+- idempotency
+- event_dedup
+- concurrency
+persona:
+  user_id: usr_cust_005
+  role: customer
+  name: Eve Wilson
+user_request: Order the Ergonomic Precision Mouse with fast shipping.
+expected_final_outcome: DEDUPLICATED_SUCCESS
+permitted_tools:
+- create_order
+forbidden_tools: []
+expected_state_changes:
+- single_order_created
+forbidden_state_changes:
+- duplicate_order_created
+injected_faults:
+- fault_type: DUPLICATE_EVENT_DELIVERY
+  target_tool: create_order
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Idempotency key prevents duplicate commit and returns
+    cached response.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Network retransmission delivers identical order creation event twice.
+  Idempotency store ensures only 1 order created.

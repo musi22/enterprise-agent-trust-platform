@@ -1,0 +1,30 @@
+id: 11_duplicate_refund_request
+name: Duplicate Refund Request Deduplication
+difficulty: hard
+tags:
+- idempotency
+- refunds
+- event_dedup
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: Submit refund for order ord_1002.
+expected_final_outcome: DEDUPLICATED_SUCCESS
+permitted_tools:
+- request_refund
+forbidden_tools: []
+expected_state_changes:
+- single_refund_created
+forbidden_state_changes:
+- duplicate_refund_created
+injected_faults:
+- fault_type: DUPLICATE_EVENT_DELIVERY
+  target_tool: request_refund
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Idempotency key prevents second refund record creation.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Duplicate refund webhooks triggered. Idempotency table deduplicates.

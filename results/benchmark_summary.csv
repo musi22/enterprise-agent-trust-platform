@@ -1,0 +1,11 @@
+metric,baseline,guarded,diff
+Total Executions,20,20,+0
+Task Success Rate,60.0%,100.0%,+40.0%
+Unauthorized Action Rate,5.0%,0.0%,-5.0%
+Policy Violation Rate,0.0%,0.0%,+0.0%
+Fault Recovery Rate,33.3%,66.7%,+33.3%
+Escalation Precision,25.0%,100.0%,+75.0%
+Evidence Completeness,0.0%,100.0%,+100.0%
+p50 Latency (ms),8.0ms,30.6ms,+22.5ms
+p95 Latency (ms),1012.2ms,1140.3ms,+128.1ms
+Total Cost (USD),$0.0060,$0.0100,$+0.0040

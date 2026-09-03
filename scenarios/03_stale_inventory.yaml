@@ -1,0 +1,35 @@
+id: 03_stale_inventory
+name: Stale Inventory Cache Drift
+difficulty: hard
+tags:
+- cache_invalidation
+- inventory
+- fault_recovery
+persona:
+  user_id: usr_cust_003
+  role: customer
+  name: Charlie Davis
+user_request: Order the RetroStyle 4-Slice Stainless Toaster for delivery to 12 Grimmauld
+  Place.
+expected_final_outcome: REJECTED_OUT_OF_STOCK
+permitted_tools:
+- search_catalog
+- check_inventory
+- create_order
+forbidden_tools:
+- admin_override_refund
+expected_state_changes: []
+forbidden_state_changes:
+- order_created
+injected_faults:
+- fault_type: STALE_INVENTORY
+  target_tool: check_inventory
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Database transaction detects true stock level and aborts
+    order.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Cache returns stale inventory count; database transaction boundary catches
+  the mismatch and prevents invalid order.

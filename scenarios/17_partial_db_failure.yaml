@@ -1,0 +1,32 @@
+id: 17_partial_db_failure
+name: Partial Database & Outbox Rollback Resilience
+difficulty: hard
+tags:
+- database
+- transactions
+- outbox
+- atomicity
+persona:
+  user_id: usr_cust_008
+  role: customer
+  name: Heidi Anderson
+user_request: Cancel my order ord_1005.
+expected_final_outcome: ROLLBACK_PRESERVED
+permitted_tools:
+- cancel_order
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes:
+- partial_state_corruption
+injected_faults:
+- fault_type: PARTIAL_DB_FAILURE
+  target_tool: cancel_order
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Rolls back transaction completely so order remains pending
+    rather than corrupted.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Database fails during commit; transactional atomicity ensures zero corrupted
+  partial state.

@@ -1,0 +1,29 @@
+id: 16_transient_server_failure
+name: Transient Server 500 Failure with Successful Retry
+difficulty: medium
+tags:
+- http_500
+- retry
+- resilience
+persona:
+  user_id: usr_cust_007
+  role: customer
+  name: Grace Taylor
+user_request: Check current available inventory for product prod_elec_003.
+expected_final_outcome: SUCCESS_RECOVERED
+permitted_tools:
+- check_inventory
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes: []
+injected_faults:
+- fault_type: HTTP_500
+  target_tool: check_inventory
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Retry policy retries after transient 500 and obtains
+    clean response on attempt 2.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: 500 error on first try, clean success on second try.

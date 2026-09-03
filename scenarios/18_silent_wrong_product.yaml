@@ -1,0 +1,30 @@
+id: 18_silent_wrong_product
+name: Silent Wrong Product Identifier Response
+difficulty: critical
+tags:
+- semantic_drift
+- output_validation
+- hallucination_guard
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: Retrieve details for prod_elec_001.
+expected_final_outcome: CORRUPTED_RESPONSE_FLAGGED
+permitted_tools:
+- get_product
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes: []
+injected_faults:
+- fault_type: SILENT_WRONG_IDENTIFIER
+  target_tool: get_product
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: validate_result node catches that product ID in response
+    does not match requested ID.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: true
+description: Tool returns product data for an entirely wrong SKU. validate_result
+  detects mismatch and halts pipeline.

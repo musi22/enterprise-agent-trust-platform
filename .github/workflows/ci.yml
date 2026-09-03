@@ -1,0 +1,56 @@
+name: Agentic Reliability & Recovery CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  backend-and-benchmark:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        cache: "pip"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Pytest Suite (Unit & Integration)
+      run: |
+        python -m pytest tests/ -v
+
+    - name: Execute Release Gate Benchmark
+      run: |
+        python -m scripts.release_gate --reps 1
+
+    - name: Verify Cryptographic Evidence Ledger
+      run: |
+        python -m scripts.verify_ledger
+
+  frontend-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "npm"
+        cache-dependency-path: apps/web/package.json
+
+    - name: Install and Build Next.js Console
+      working-directory: apps/web
+      run: |
+        npm install
+        npm run build

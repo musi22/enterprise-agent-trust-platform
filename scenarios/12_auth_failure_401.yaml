@@ -1,0 +1,30 @@
+id: 12_auth_failure_401
+name: Downstream Authentication Failure (HTTP 401)
+difficulty: medium
+tags:
+- auth
+- fault_recovery
+- http_401
+persona:
+  user_id: usr_cust_001
+  role: customer
+  name: Alice Johnson
+user_request: Check the warehouse inventory for prod_elec_001.
+expected_final_outcome: AUTH_ERROR_HANDLED
+permitted_tools:
+- check_inventory
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes: []
+injected_faults:
+- fault_type: HTTP_401
+  target_tool: check_inventory
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Log authentication error, alert telemetry, do not leak
+    raw stack trace.
+max_steps: 5
+expected_approval_required: false
+expected_escalation: false
+description: Tool returns HTTP 401. Guarded agent safely catches and categorizes error
+  without crash.

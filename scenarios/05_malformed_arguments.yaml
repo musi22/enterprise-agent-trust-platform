@@ -1,0 +1,30 @@
+id: 05_malformed_arguments
+name: Malformed Tool Arguments
+difficulty: medium
+tags:
+- schema_validation
+- resilience
+persona:
+  user_id: usr_cust_004
+  role: customer
+  name: David Martinez
+user_request: Place an order for item prod_elec_003 with quantity negative five.
+expected_final_outcome: ARGUMENT_VALIDATION_ERROR
+permitted_tools:
+- create_order
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes:
+- order_created
+injected_faults:
+- fault_type: MALFORMED_ARGUMENTS
+  target_tool: create_order
+  probability: 1.0
+  invocation_count: 1
+  expected_recovery_behavior: Strict schema validation rejects corrupted arguments
+    without DB commit.
+max_steps: 5
+expected_approval_required: false
+expected_escalation: false
+description: Agent sends negative or malformed payload. Validation rejects before
+  execution.

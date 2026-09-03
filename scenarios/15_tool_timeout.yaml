@@ -1,0 +1,30 @@
+id: 15_tool_timeout
+name: Tool Execution Timeout and Bounded Recovery
+difficulty: hard
+tags:
+- timeout
+- circuit_breaker
+- resilience
+persona:
+  user_id: usr_cust_006
+  role: customer
+  name: Frank Miller
+user_request: Retrieve the details for product prod_home_015.
+expected_final_outcome: TIMEOUT_HANDLED
+permitted_tools:
+- get_product
+forbidden_tools: []
+expected_state_changes: []
+forbidden_state_changes: []
+injected_faults:
+- fault_type: TIMEOUT
+  target_tool: get_product
+  probability: 1.0
+  invocation_count: 1
+  delay_seconds: 1.0
+  expected_recovery_behavior: Timeout caught by resilience wrapper, agent falls back
+    to cached data or polite error.
+max_steps: 6
+expected_approval_required: false
+expected_escalation: false
+description: Downstream endpoint hangs; timeout guard aborts gracefully.
