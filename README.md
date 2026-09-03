@@ -3,7 +3,7 @@
 > **Enterprise Agent Trust & Evaluation Platform**  
 > An independently built, Amazon-inspired retail operations agent reliability sandbox and evaluation harness.
 
-[![CI](https://github.com/enterprise-agent-trust/commerce-reliability-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/enterprise-agent-trust/commerce-reliability-lab)
+[![CI](https://github.com/musi22/enterprise-agent-trust-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/musi22/enterprise-agent-trust-platform)
 [![Release Gate](https://img.shields.io/badge/Release%20Gate-PASSED-emerald)](results/amazon_inspired_result_card.md)
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue)](apps/api)
 [![LangGraph](https://img.shields.io/badge/LangGraph-9--Node%20Guarded%20SM-cyan)](packages/agent)
