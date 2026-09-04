@@ -1,4 +1,4 @@
-﻿import os
+import os
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
@@ -30,10 +30,10 @@ async def readiness_probe(session: AsyncSession = Depends(get_db)):
             "ready": True,
             "provider_mode": _get_provider_mode(),
         }
-    except Exception as e:
+    except Exception:
         return {
             "status": "unhealthy",
-            "database": f"error: {str(e)}",
+            "database": "disconnected",
             "ready": False,
             "provider_mode": _get_provider_mode(),
         }

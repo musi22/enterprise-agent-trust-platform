@@ -45,6 +45,30 @@ Thumbs.db
 *.swp
 *.swo
 
-# Environment
+# Environment & Secrets
 .env
-.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# Playwright & E2E Test Artifacts
+tests/e2e/videos/
+test-results/
+playwright-report/
+live_cloud_screenshot.png
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Cloud Provider Metadata
+.railway/
+.vercel/
+
+# Ad-hoc Scratch
+check_features.py
+scratch/

@@ -1,9 +1,11 @@
 import asyncio
+import pytest
 from apps.api.app.db.database import AsyncSessionLocal
 from packages.agent.baseline import BaselineAgent
 from packages.agent.guarded_graph import GuardedAgent
 from packages.fault_injection.proxy import FaultInjectionProxy
 
+@pytest.mark.asyncio
 async def test_run():
     async with AsyncSessionLocal() as session:
         # 1. Test Baseline Agent on search
