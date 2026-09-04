@@ -75,7 +75,7 @@ The platform implements a dual-agent comparative architecture:
 ```mermaid
 flowchart TB
     subgraph UI ["Engineering Console (Next.js 14 + Tailwind)"]
-        Console["1. Overview & Health\n2. Scenario Lab & Replay\n3. Trace Explorer\n4. Approval Inbox\n5. Benchmark & Release Gate\n6. Cryptographic Evidence Ledger"]
+        Console["1. Overview & Health<br/>2. Scenario Lab & Replay<br/>3. Trace Explorer<br/>4. Approval Inbox<br/>5. Benchmark & Release Gate<br/>6. Cryptographic Evidence Ledger"]
     end
 
     subgraph API ["FastAPI Platform Core (/api/v1)"]
@@ -90,25 +90,25 @@ flowchart TB
     subgraph GuardedStateGraph ["LangGraph 9-Node Guarded State Machine"]
         N1["1. classify_intent"] --> N2["2. create_plan"]
         N2 --> N3{"3. authorize_plan"}
-        N3 -->|ALLOW| N5["5. execute_tool"]
-        N3 -->|REQUIRE_APPROVAL| N4["4. request_approval (HITL)"]
-        N3 -->|DENY| N8["8. emit_evidence_receipt"]
-        N4 -->|Approved| N5
-        N4 -->|Pending / Rejected| N8
+        N3 -->|"ALLOW"| N5["5. execute_tool"]
+        N3 -->|"REQUIRE_APPROVAL"| N4["4. request_approval (HITL)"]
+        N3 -->|"DENY"| N8["8. emit_evidence_receipt"]
+        N4 -->|"Approved"| N5
+        N4 -->|"Pending or Rejected"| N8
         N5 --> N6{"6. validate_result"}
-        N6 -->|Clean & Next Tool| N3
-        N6 -->|Clean & Complete| N8
-        N6 -->|Fault / Anomaly| N7{"7. recover_or_escalate"}
-        N7 -->|Retryable (429/500/Timeout)| N5
-        N7 -->|Fatal / Max Retries| N8
+        N6 -->|"Clean - Next Tool"| N3
+        N6 -->|"Clean - Complete"| N8
+        N6 -->|"Fault or Anomaly"| N7{"7. recover_or_escalate"}
+        N7 -->|"Retryable Fault (429/500)"| N5
+        N7 -->|"Fatal or Max Retries"| N8
         N8 --> N9["9. complete_run"]
     end
 
     subgraph ResilienceBoundary ["Deterministic Policy & Storage Boundary"]
-        PolicyEngine["Policy Engine\n- Tool allowlists (RBAC)\n- Resource ownership checks\n- Order state transitions\n- Refund limits ($50 threshold)"]
-        FaultProxy["Fault Injection Proxy\n(15 deterministic fault rules)"]
+        PolicyEngine["Policy Engine<br/>- Tool allowlists (RBAC)<br/>- Resource ownership checks<br/>- Order state transitions<br/>- Refund limits ($50 threshold)"]
+        FaultProxy["Fault Injection Proxy<br/>(15 deterministic fault rules)"]
         IdempotencyStore[("Transactional Idempotency & Outbox")]
-        EvidenceLedger[("Tamper-Evident Ledger\nSHA-256 Hash Chain")]
+        EvidenceLedger[("Tamper-Evident Ledger<br/>SHA-256 Hash Chain")]
     end
 
     Console <--> API

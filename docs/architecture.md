@@ -6,33 +6,33 @@ The platform implements a resilient, multi-tiered enterprise architecture that s
 
 ```mermaid
 flowchart TD
-    UserQuery(["User Task / Query"]) --> N1["1. classify_intent\n(Extract intent & risk)"]
-    N1 --> N2["2. create_plan\n(Formulate tool sequence)"]
-    N2 --> N3{"3. authorize_plan\n(PolicyEngine RBAC & Ownership)"}
+    UserQuery(["User Task / Query"]) --> N1["1. classify_intent<br/>(Extract intent & risk)"]
+    N1 --> N2["2. create_plan<br/>(Formulate tool sequence)"]
+    N2 --> N3{"3. authorize_plan<br/>(PolicyEngine RBAC & Ownership)"}
     
-    N3 -->|ALLOW| N5["5. execute_tool\n(Via Fault Proxy & Circuit Breaker)"]
-    N3 -->|REQUIRE_APPROVAL| N4["4. request_approval\n(Enqueue to Human Inbox)"]
-    N3 -->|DENY| N8["8. emit_evidence_receipt\n(Record Rejection)"]
+    N3 -->|"ALLOW"| N5["5. execute_tool<br/>(Via Fault Proxy & Circuit Breaker)"]
+    N3 -->|"REQUIRE_APPROVAL"| N4["4. request_approval<br/>(Enqueue to Human Inbox)"]
+    N3 -->|"DENY"| N8["8. emit_evidence_receipt<br/>(Record Rejection)"]
     
-    N4 -->|Supervisor Approved| N5
-    N4 -->|Pending / Rejected| N8
+    N4 -->|"Supervisor Approved"| N5
+    N4 -->|"Pending / Rejected"| N8
     
-    N5 --> N6{"6. validate_result\n(Schema, Semantic & State Check)"}
+    N5 --> N6{"6. validate_result<br/>(Schema, Semantic & State Check)"}
     
-    N6 -->|Clean Result & More Tools| N3
-    N6 -->|Clean Result & Done| N8
-    N6 -->|Fault / Anomaly Detected| N7{"7. recover_or_escalate\n(Retryable?)"}
+    N6 -->|"Clean Result & More Tools"| N3
+    N6 -->|"Clean Result & Done"| N8
+    N6 -->|"Fault / Anomaly Detected"| N7{"7. recover_or_escalate<br/>(Retryable?)"}
     
-    N7 -->|Retryable (429/500/Timeout)| N5
-    N7 -->|Unrecoverable / Max Retries| N8
+    N7 -->|"Retryable (429/500/Timeout)"| N5
+    N7 -->|"Unrecoverable / Max Retries"| N8
     
-    N8 --> N9["9. complete_run\n(Persist Events, Latency & Metrics)"]
+    N8 --> N9["9. complete_run<br/>(Persist Events, Latency & Metrics)"]
     N9 --> FinalState(["Final Outcome State"])
 
     subgraph Resilience_Boundary ["Resilience & Storage Boundary"]
-        PolicyEngine["Policy Engine\n- Tool allowlist\n- Ownership checks\n- State transition rules\n- Refund threshold ($50)"]
-        FaultProxy["Fault Injection Proxy\n(15 deterministic fault types)"]
-        EvidenceLedger[("Tamper-Evident Ledger\nSHA-256 Hash Chain")]
+        PolicyEngine["Policy Engine<br/>- Tool allowlist<br/>- Ownership checks<br/>- State transition rules<br/>- Refund threshold ($50)"]
+        FaultProxy["Fault Injection Proxy<br/>(15 deterministic fault types)"]
+        EvidenceLedger[("Tamper-Evident Ledger<br/>SHA-256 Hash Chain")]
         OutboxTable[("Transactional Outbox")]
     end
 
