@@ -1,11 +1,11 @@
-﻿{
+{
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
     "dockerfilePath": "apps/api/Dockerfile"
   },
   "deploy": {
-    "startCommand": "uvicorn apps.api.app.main:app --host 0.0.0.0 --port $PORT",
+    "startCommand": "sh -c 'uvicorn apps.api.app.main:app --host 0.0.0.0 --port ${PORT:-8000}'",
     "healthcheckPath": "/health/live",
     "healthcheckTimeout": 30,
     "restartPolicyType": "ON_FAILURE"
