@@ -19,7 +19,7 @@ from packages.fault_injection.rules import FaultConfig, FaultType
 
 async def run_demo():
     print("================================================================================")
-    print("🎬 AGENTIC COMMERCE RELIABILITY & RECOVERY LAB - 90-SECOND LIVE DEMO")
+    print("🎬 AGENTIC COMMERCE RELIABILITY & RECOVERY LAB - INTERACTIVE LIVE DEMO")
     print("================================================================================")
 
     async with AsyncSessionLocal() as session:

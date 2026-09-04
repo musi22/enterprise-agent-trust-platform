@@ -16,7 +16,7 @@
 
 ---
 
-## ⚡ 60-Second Live Tour for Recruiters & Hiring Managers
+## ⚡ 60-Second Interactive Live Tour
 
 Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)** (no login required, 24/7 online):
 
@@ -46,23 +46,13 @@ Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)*
 
 ---
 
-## 📌 For Technical Recruiters & Hiring Managers
+## 🏛️ Core Architecture & Engineering Highlights
 
-**Target Roles**: AI Platform Engineer &bull; Agent Infrastructure Engineer &bull; Backend Software Engineer (Amazon / AWS / Enterprise AI)
-
-### Core Architecture Competencies Demonstrated:
-* **Autonomous Agent State Machines**: Built a 9-node LangGraph state machine separating intent classification, planning, authorization, tool dispatch, result validation, and audit logging.
-* **Deterministic Policy Enforcement**: Pre-execution security engine enforcing RBAC, multi-tenant resource ownership, order lifecycle state machines, and prompt injection defense.
-* **Distributed Systems Resilience**: Idempotency key deduplication (0.0% duplicate writes), transactional outbox pattern, and bounded exponential backoff ($2^{N-1} \times 0.1\text{s}$) healing transient 429/500 faults.
-* **Cryptographic Auditing**: Append-only SHA-256 hash-chain evidence ledger with $O(N)$ tamper detection pinpointing exact corrupted block indices.
-* **Release Gate Evaluation**: 20 ground-truth scenarios achieving **100% Task Success** (+40% lift over Baseline) and **0.0% Unauthorized Actions**.
-
-### Verified Resume Bullets:
-* *Architected a 9-node LangGraph autonomous agent state machine for retail operations, decoupling probabilistic LLM planning from deterministic RBAC policy evaluation, order-state precondition checks, and output validation.*
-* *Engineered an append-only SHA-256 cryptographic evidence ledger, linking model decisions and tool executions into a tamper-evident hash chain with mathematical integrity verification and PII/secret redaction.*
-* *Built a deterministic fault-injection engine simulating 15 real-world distributed failure modes (HTTP 429 rate limits, 500 errors, stale inventory caches, price drift) with bounded exponential backoff recovery.*
-* *Developed a full-stack Next.js 14 and FastAPI engineering console featuring live scenario replays, multi-tenant trace timelines, human-in-the-loop approval workflows, and interactive ledger verification.*
-* *Designed an automated CI release gate evaluating 20 ground-truth scenarios across baseline and guarded agents, achieving 100% critical gates pass, 0.0% unauthorized actions, and 0.0% duplicate committed writes.*
+* **Autonomous Agent State Machines**: 9-node LangGraph directed state graph separating intent classification, planning, authorization, tool dispatch, result validation, and audit logging into deterministic stages.
+* **Deterministic Policy Enforcement**: Pre-execution security engine strictly evaluating RBAC permissions, multi-tenant resource ownership boundaries, order lifecycle state machines, and prompt injection defense.
+* **Distributed Systems Resilience**: Idempotency key deduplication (0.0% duplicate writes), transactional outbox pattern, and bounded exponential backoff ($2^{N-1} \times 0.1\text{s}$) healing transient 429 and 500 network faults.
+* **Cryptographic Non-Repudiation**: Append-only SHA-256 hash-chain evidence ledger with $O(N)$ mathematical tamper detection pinpointing exact corrupted block indices.
+* **Automated CI Quality Gate**: 20 ground-truth enterprise scenarios achieving **100% Task Success** (+40% lift over Baseline) and **0.0% Unauthorized Actions**.
 
 ---
 
@@ -198,7 +188,7 @@ make eval
 # 6. Verify cryptographic hash chain integrity
 make ledger-verify
 
-# 7. Run 90-second interactive terminal walkthrough
+# 7. Run interactive terminal walkthrough
 make demo
 ```
 
@@ -271,14 +261,14 @@ Spins up PostgreSQL, Redis, Redpanda, Jaeger, FastAPI, and Next.js console.
 
 ---
 
-## 7. Portfolio Documentation Suite
+## 7. Architecture Specifications & Technical Documentation
 
-- [`docs/problem-memo.md`](docs/problem-memo.md): Strategic memo on autonomous agent reliability in enterprise commerce.
+- [`docs/FEATURES.md`](docs/FEATURES.md): Detailed 6-feature technical specification and code references.
+- [`docs/problem-memo.md`](docs/problem-memo.md): Strategic engineering memo on autonomous agent reliability in enterprise commerce.
 - [`docs/architecture.md`](docs/architecture.md): In-depth 9-node LangGraph state machine specification.
 - [`docs/threat-model.md`](docs/threat-model.md): STRIDE threat analysis for commerce agents.
-- [`docs/evaluation-methodology.md`](docs/evaluation-methodology.md): Mathematical formulations and statistical rigor.
-- [`docs/failure-taxonomy.md`](docs/failure-taxonomy.md): Taxonomy of agent failure modes.
-- [`docs/limitations.md`](docs/limitations.md): Explicit assumptions, synthetic scope, and production scaling.
-- [`docs/amazon-inspired-result-card.md`](docs/amazon-inspired-result-card.md): Formal research result card.
-- [`docs/interview-talking-points.md`](docs/interview-talking-points.md): High-yield interview questions for Amazon/AWS roles.
-- [`docs/90-second-demo-script.md`](docs/90-second-demo-script.md): Turn-by-turn executive demonstration script.
+- [`docs/evaluation-methodology.md`](docs/evaluation-methodology.md): Mathematical formulations and statistical evaluation rigor.
+- [`docs/failure-taxonomy.md`](docs/failure-taxonomy.md): Taxonomy of distributed failure modes and agent edge cases.
+- [`docs/limitations.md`](docs/limitations.md): Explicit assumptions, synthetic scope, and production scaling roadmap.
+- [`docs/amazon-inspired-result-card.md`](docs/amazon-inspired-result-card.md): Formal research result card and baseline comparison.
+- [`docs/watch_demo.html`](docs/watch_demo.html): Interactive offline video demo player.
