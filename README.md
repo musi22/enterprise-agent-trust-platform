@@ -33,9 +33,7 @@ Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)*
 
 > A full automated Playwright walkthrough executing all 6 features with live UI verification, graph trace exploration, HITL approval handling, and cryptographic tamper detection.
 
-- 🎬 **Watch Walkthrough (MP4):** [`docs/videos/enterprise_features_demo.mp4`](docs/videos/enterprise_features_demo.mp4)
-- 🌐 **Interactive Local Player:** Double-click [`docs/watch_demo.html`](docs/watch_demo.html) to open the player in your browser.
-- 📹 **Raw WebM Format:** [`docs/videos/enterprise_features_demo.webm`](docs/videos/enterprise_features_demo.webm)
+- 🎬 **Watch Walkthrough Video (MP4):** [`docs/videos/enterprise_features_demo.mp4`](docs/videos/enterprise_features_demo.mp4)
 - 📚 **Comprehensive Feature-by-Feature Guide:** [`docs/FEATURES.md`](docs/FEATURES.md)
 
 ---
@@ -269,5 +267,4 @@ Spins up PostgreSQL, Redis, Redpanda, Jaeger, FastAPI, and Next.js console.
 - [`docs/evaluation-methodology.md`](docs/evaluation-methodology.md): Mathematical formulations and statistical evaluation rigor.
 - [`docs/failure-taxonomy.md`](docs/failure-taxonomy.md): Taxonomy of distributed failure modes and agent edge cases.
 - [`docs/limitations.md`](docs/limitations.md): Explicit assumptions, synthetic scope, and production scaling roadmap.
-- [`docs/amazon-inspired-result-card.md`](docs/amazon-inspired-result-card.md): Formal research result card and baseline comparison.
-- [`docs/watch_demo.html`](docs/watch_demo.html): Interactive offline video demo player.
+- [`results/amazon_inspired_result_card.md`](results/amazon_inspired_result_card.md): Formal research result card and baseline comparison.
