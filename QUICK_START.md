@@ -1,11 +1,19 @@
-﻿# Quick Start Guide — Enterprise Agent Trust & Evaluation Platform
+# Quick Start Guide — Enterprise Agent Trust & Evaluation Platform
 
 > An end-to-end AI reliability & safety lab for agentic retail commerce.
 > Works fully offline with realistic mock data, or connect a Gemini API key for live LLM calls.
 
 ---
 
-## Option 1: Run Locally (Recommended — 2 minutes)
+## 🚀 Live Cloud Demo (Instant — No Installation Required)
+
+Open the live cloud console directly in your browser:
+- **Live Web Console:** [https://enterprise-ai-web-production.up.railway.app](https://enterprise-ai-web-production.up.railway.app)
+- **Live API Documentation:** [https://enterprise-ai-api-production.up.railway.app/docs](https://enterprise-ai-api-production.up.railway.app/docs)
+
+---
+
+## Option 1: Run Locally (2 minutes)
 
 ### Prerequisites
 - Python 3.10+ ([python.org](https://python.org))
