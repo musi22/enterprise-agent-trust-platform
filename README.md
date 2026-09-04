@@ -29,6 +29,15 @@ Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)*
 
 ---
 
+## 🎥 End-to-End Feature Demonstration Video
+
+> A full automated Playwright walkthrough executing all 6 features with live UI verification, graph trace exploration, HITL approval handling, and cryptographic tamper detection.
+
+- 📹 **Watch Video Walkthrough:** [`docs/videos/enterprise_features_demo.webm`](docs/videos/enterprise_features_demo.webm)
+- 📚 **Comprehensive Feature-by-Feature Guide:** [`docs/FEATURES.md`](docs/FEATURES.md)
+
+---
+
 > [!IMPORTANT]
 > **Independent Project Notice**: This is an independent open-source research and platform reliability project inspired by enterprise retail operations. It does not use Amazon logos, trademarks, or proprietary customer data, and makes no claim of affiliation, production access, or internal Amazon knowledge. All commerce fixtures, entities, and transactions are 100% synthetic and simulated locally.
 
