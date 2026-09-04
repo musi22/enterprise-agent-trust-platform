@@ -2,13 +2,30 @@
 
 > **Enterprise Agent Trust & Evaluation Platform**  
 > An independently built, Amazon-inspired retail operations agent reliability sandbox and evaluation harness.
+>
+> 🌐 **Live Web Console:** [https://enterprise-ai-web-production.up.railway.app](https://enterprise-ai-web-production.up.railway.app)  
+> ⚡ **Live API Documentation:** [https://enterprise-ai-api-production.up.railway.app/docs](https://enterprise-ai-api-production.up.railway.app/docs)  
+> 📖 **Recruiter Quickstart:** [QUICK_START.md](QUICK_START.md)
 
-[![CI](https://github.com/musi22/enterprise-agent-trust-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/musi22/enterprise-agent-trust-platform)
-[![Release Gate](https://img.shields.io/badge/Release%20Gate-PASSED-emerald)](results/amazon_inspired_result_card.md)
-[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue)](apps/api)
-[![LangGraph](https://img.shields.io/badge/LangGraph-9--Node%20Guarded%20SM-cyan)](packages/agent)
-[![License](https://img.shields.io/badge/License-MIT-slate)](LICENSE)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmusi22%2Fenterprise-agent-trust-platform&root-directory=apps%2Fweb)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Active%20(Railway)-success?style=for-the-badge&logo=railway)](https://enterprise-ai-web-production.up.railway.app)
+[![API Docs](https://img.shields.io/badge/Swagger%20API-v1.0.0-blue?style=for-the-badge&logo=fastapi)](https://enterprise-ai-api-production.up.railway.app/docs)
+[![Release Gate](https://img.shields.io/badge/Release%20Gate-PASSED-emerald?style=for-the-badge)](results/amazon_inspired_result_card.md)
+[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-blue?style=for-the-badge&logo=python)](apps/api)
+[![LangGraph](https://img.shields.io/badge/LangGraph-9--Node%20State%20Machine-cyan?style=for-the-badge)](packages/agent)
+[![Next.js](https://img.shields.io/badge/Next.js-14%20Console-black?style=for-the-badge&logo=next.js)](apps/web)
+
+---
+
+## ⚡ 60-Second Live Tour for Recruiters & Hiring Managers
+
+Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)** (no login required, 24/7 online):
+
+1. **Overview Tab:** Review the executive reliability dashboard with real-time release gates (`PASSED`), failure taxonomy, and KPI cards (+40% lift in task success).
+2. **Scenario Lab:** Select any of the **20 enterprise scenarios** (e.g., `04_price_changed`, `06_cross_tenant_access_attempt`) and run live comparisons between **Baseline** (unprotected) and **Guarded** (LangGraph state machine).
+3. **Trace Explorer:** Drill down into microsecond-level tool execution traces, policy validations, and state transitions.
+4. **Approval Inbox:** Observe human-in-the-loop governance where high-value refunds (> $50) or risk events pause for supervisor sign-off.
+5. **Benchmark & Gates:** Inspect statistical evaluation across all 20 scenarios under seeded network faults (429 rate limits, 500 errors, cache drift).
+6. **Evidence Ledger:** Audit the cryptographically signed **SHA-256 hash chain** and test the real-time tamper-detection engine.
 
 ---
 
