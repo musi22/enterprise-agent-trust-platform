@@ -14,12 +14,15 @@ from packages.agent.guarded_graph import GuardedAgent
 from packages.fault_injection.proxy import FaultInjectionProxy
 from packages.fault_injection.rules import FaultConfig, FaultType
 
+from packages.agent.providers import get_model_provider
+
 router = APIRouter(prefix="/runs", tags=["Agent Runs & Replay"])
 
 class CreateRunRequest(BaseModel):
     query: Optional[str] = None
     scenario_id: Optional[str] = None
     agent_mode: str = "guarded"  # baseline or guarded
+    provider_name: Optional[str] = None  # deterministic_mock, gemini, openai
     persona: Dict[str, Any] = Field(default_factory=lambda: {"user_id": "usr_cust_001", "role": "customer", "name": "Alice Johnson"})
     seed: int = 42
     fault_configs: Optional[List[Dict[str, Any]]] = None
@@ -93,7 +96,8 @@ async def create_agent_run(req: CreateRunRequest, session: AsyncSession = Depend
             ))
         await session.commit()
     else:
-        agent = GuardedAgent()
+        provider_inst = get_model_provider(req.provider_name)
+        agent = GuardedAgent(provider=provider_inst)
         result = await agent.run(
             user_query=user_query,
             persona=req.persona,

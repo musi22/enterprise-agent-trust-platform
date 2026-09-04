@@ -8,7 +8,7 @@ import { TraceExplorerTab } from "@/components/tabs/TraceExplorerTab";
 import { ApprovalInboxTab } from "@/components/tabs/ApprovalInboxTab";
 import { BenchmarkTab } from "@/components/tabs/BenchmarkTab";
 import { EvidenceTab } from "@/components/tabs/EvidenceTab";
-import { fetchLatestBenchmark, fetchReleaseGate, fetchScenarios, IS_DEMO_MODE } from "@/lib/api";
+import { fetchLatestBenchmark, fetchReleaseGate, fetchScenarios, fetchHealth, IS_DEMO_MODE } from "@/lib/api";
 
 export default function ConsoleDashboard() {
   const [activeTab, setActiveTab] = useState<string>("overview");
@@ -16,18 +16,21 @@ export default function ConsoleDashboard() {
   const [benchmark, setBenchmark] = useState<any | null>(null);
   const [releaseGate, setReleaseGate] = useState<any | null>(null);
   const [scenarios, setScenarios] = useState<any[]>([]);
+  const [providerMode, setProviderMode] = useState<string>(IS_DEMO_MODE ? "DEMO (Mock)" : "");
   const [loading, setLoading] = useState<boolean>(true);
 
   const loadData = async () => {
     try {
-      const [benchData, gateData, scData] = await Promise.all([
+      const [benchData, gateData, scData, healthData] = await Promise.all([
         fetchLatestBenchmark().catch(() => null),
         fetchReleaseGate().catch(() => null),
         fetchScenarios().catch(() => []),
+        fetchHealth().catch(() => ({ provider_mode: "DEMO (Mock)" })),
       ]);
       setBenchmark(benchData);
       setReleaseGate(gateData);
       setScenarios(scData);
+      if (healthData?.provider_mode) setProviderMode(healthData.provider_mode);
     } catch (err) {
       console.error("Dashboard data load error:", err);
     } finally {
@@ -50,6 +53,7 @@ export default function ConsoleDashboard() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         gatePassed={releaseGate?.release_gate_passed ?? false}
+        providerMode={providerMode}
       />
 
       {/* Demo Mode Banner — shown on Vercel when no backend is connected */}

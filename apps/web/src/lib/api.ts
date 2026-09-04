@@ -17,14 +17,15 @@ async function safeFetch(url: string, options?: RequestInit) {
 }
 
 export async function fetchHealth() {
-  if (IS_DEMO_MODE) return { status: "demo", version: "1.0.0" };
+  if (IS_DEMO_MODE) return { status: "demo", version: "1.0.0", provider_mode: "DEMO (Mock)" };
   try {
     const res = await fetch(`${API_BASE}/health/ready`, { cache: "no-store" });
     return res.json();
   } catch {
-    return { status: "offline" };
+    return { status: "offline", provider_mode: "DEMO (Mock)" };
   }
 }
+
 
 export async function fetchScenarios() {
   const res = await safeFetch(`${API_BASE}/api/v1/scenarios`);
@@ -48,7 +49,9 @@ export async function executeAgentRun(payload: {
   scenario_id?: string;
   query?: string;
   agent_mode: string;
+  provider_name?: string;
   seed: number;
+  persona?: any;
 }) {
   const res = await safeFetch(`${API_BASE}/api/v1/runs`, {
     method: "POST",

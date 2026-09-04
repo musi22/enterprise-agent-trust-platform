@@ -16,9 +16,10 @@ interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   gatePassed: boolean;
+  providerMode?: string;
 }
 
-export const ConsoleHeader: React.FC<HeaderProps> = ({ activeTab, setActiveTab, gatePassed }) => {
+export const ConsoleHeader: React.FC<HeaderProps> = ({ activeTab, setActiveTab, gatePassed, providerMode }) => {
   const navItems = [
     { id: "overview", label: "Overview", icon: Activity },
     { id: "scenarios", label: "Scenario Lab", icon: FlaskConical },
@@ -53,7 +54,7 @@ export const ConsoleHeader: React.FC<HeaderProps> = ({ activeTab, setActiveTab, 
           </div>
 
           {/* Release Gate Pill */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             <div className={`flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium border ${
               gatePassed 
                 ? "bg-emerald-950/70 border-emerald-800/80 text-emerald-400"
@@ -62,6 +63,20 @@ export const ConsoleHeader: React.FC<HeaderProps> = ({ activeTab, setActiveTab, 
               <span className={`w-2 h-2 rounded-full ${gatePassed ? "bg-emerald-400 animate-pulse" : "bg-rose-400"}`} />
               <span>RELEASE GATE: {gatePassed ? "PASSED" : "FAILED"}</span>
             </div>
+
+            {/* Provider Mode Badge */}
+            {providerMode && (
+              <div className={`flex items-center space-x-1.5 px-2.5 py-1 rounded text-xs font-mono font-medium border ${
+                providerMode.startsWith("LIVE")
+                  ? "bg-green-950/70 border-green-700/60 text-green-400"
+                  : "bg-blue-950/70 border-blue-700/60 text-blue-400"
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${
+                  providerMode.startsWith("LIVE") ? "bg-green-400 animate-pulse" : "bg-blue-400"
+                }`} />
+                <span>{providerMode.startsWith("LIVE") ? "🟢" : "🔵"} {providerMode}</span>
+              </div>
+            )}
 
             <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-xs text-slate-400 font-mono">
               <Server className="w-3.5 h-3.5 text-cyan-400" />

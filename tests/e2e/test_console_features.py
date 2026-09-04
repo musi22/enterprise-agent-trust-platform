@@ -1,10 +1,19 @@
 import pytest
+import httpx
 from playwright.async_api import async_playwright, Page, expect
 
-BASE_URL = "http://127.0.0.1:3005"
+BASE_URL = "http://127.0.0.1:3000"
+
+API_BASE = "http://127.0.0.1:8000"
 
 @pytest.mark.asyncio
 async def test_all_features_e2e():
+    # Reset DB to clean state before test to avoid cross-run contamination
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        reset_res = await client.post(f"{API_BASE}/api/v1/admin/reset-db")
+        assert reset_res.status_code == 200, f"DB reset failed: {reset_res.text}"
+        print(f"\n[Playwright] DB reset: {reset_res.json()['status']}")
+
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(viewport={"width": 1280, "height": 800})
@@ -119,7 +128,7 @@ async def test_all_features_e2e():
         await page.click("button:has-text('Verify Ledger Integrity')")
         assert await page.is_visible("text=SECURITY ALERT: AUDIT TAMPERING")
 
-        print("\n[Playwright] ✓ ALL 6 ENGINEERING CONSOLE FEATURES VERIFIED SUCCESSFULLY!")
+        print("\n[Playwright] [PASS] ALL 6 ENGINEERING CONSOLE FEATURES VERIFIED SUCCESSFULLY!")
         await browser.close()
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ from apps.api.app.api.v1.routers.policies import router as policies_router
 from apps.api.app.api.v1.routers.approvals import router as approvals_router
 from apps.api.app.api.v1.routers.evidence import router as evidence_router
 from apps.api.app.api.v1.routers.scenarios import router as scenarios_router
+from apps.api.app.api.v1.routers.admin import router as admin_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -51,6 +52,7 @@ app.include_router(policies_router, prefix=settings.API_V1_PREFIX)
 app.include_router(approvals_router, prefix=settings.API_V1_PREFIX)
 app.include_router(evidence_router, prefix=settings.API_V1_PREFIX)
 app.include_router(scenarios_router, prefix=settings.API_V1_PREFIX)
+app.include_router(admin_router, prefix=settings.API_V1_PREFIX)
 
 @app.get("/")
 async def root():

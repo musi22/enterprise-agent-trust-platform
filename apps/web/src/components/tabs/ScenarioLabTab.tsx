@@ -23,6 +23,9 @@ interface ScenarioLabTabProps {
 export const ScenarioLabTab: React.FC<ScenarioLabTabProps> = ({ scenarios, onViewTrace }) => {
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>("01_catalog_search");
   const [agentMode, setAgentMode] = useState<"baseline" | "guarded">("guarded");
+  const [providerName, setProviderName] = useState<"deterministic_mock" | "gemini">("deterministic_mock");
+  const [useCustomQuery, setUseCustomQuery] = useState<boolean>(false);
+  const [customQuery, setCustomQuery] = useState<string>("");
   const [seed, setSeed] = useState<number>(42);
   const [loading, setLoading] = useState<boolean>(false);
   const [lastRunResult, setLastRunResult] = useState<any | null>(null);
@@ -35,8 +38,10 @@ export const ScenarioLabTab: React.FC<ScenarioLabTabProps> = ({ scenarios, onVie
     setErrorMsg(null);
     try {
       const res = await executeAgentRun({
-        scenario_id: selectedScenarioId,
+        scenario_id: useCustomQuery ? undefined : selectedScenarioId,
+        query: useCustomQuery ? customQuery : undefined,
         agent_mode: agentMode,
+        provider_name: providerName,
         seed: Number(seed),
       });
       setLastRunResult(res);
@@ -112,17 +117,37 @@ export const ScenarioLabTab: React.FC<ScenarioLabTabProps> = ({ scenarios, onVie
             </div>
           </div>
 
-          {/* User Request Prompt Box */}
-          <div className="mt-4 p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-            <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-1">
-              Synthetic User Query:
-            </span>
-            <p className="text-sm font-mono text-cyan-300">"{currentScenario?.user_request}"</p>
+          {/* Prompt Mode Switcher & User Request Input Box */}
+          <div className="mt-4 p-3.5 rounded-lg bg-slate-950 border border-slate-800/80">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+                {useCustomQuery ? "Interactive Real User Input" : "Synthetic Scenario Query"}
+              </span>
+              <button
+                type="button"
+                onClick={() => setUseCustomQuery(!useCustomQuery)}
+                className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 underline"
+              >
+                {useCustomQuery ? "← Switch to Pre-packaged Scenario" : "⚡ Real User Custom Prompt Mode"}
+              </button>
+            </div>
+
+            {useCustomQuery ? (
+              <input
+                type="text"
+                value={customQuery}
+                onChange={(e) => setCustomQuery(e.target.value)}
+                placeholder="Type real user natural language query (e.g. 'Cancel order ord_1002 and refund me $20')"
+                className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded text-sm text-cyan-200 font-mono focus:outline-none focus:border-cyan-500"
+              />
+            ) : (
+              <p className="text-sm font-mono text-cyan-300">"{currentScenario?.user_request}"</p>
+            )}
           </div>
 
           {/* Controls Bar */}
           <div className="mt-5 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-800">
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-wrap items-center gap-3">
               {/* Agent Mode Toggle */}
               <div className="flex items-center space-x-1 bg-slate-950 border border-slate-800 p-1 rounded-lg">
                 <button
@@ -147,6 +172,19 @@ export const ScenarioLabTab: React.FC<ScenarioLabTabProps> = ({ scenarios, onVie
                 >
                   Guarded Mode
                 </button>
+              </div>
+
+              {/* Provider Selector */}
+              <div className="flex items-center space-x-1.5 text-xs font-mono">
+                <span className="text-slate-400">LLM Provider:</span>
+                <select
+                  value={providerName}
+                  onChange={(e: any) => setProviderName(e.target.value)}
+                  className="bg-slate-950 border border-slate-800 text-slate-200 px-2 py-1 rounded text-xs focus:outline-none focus:border-cyan-500"
+                >
+                  <option value="deterministic_mock">Deterministic Mock</option>
+                  <option value="gemini">Google Gemini LLM</option>
+                </select>
               </div>
 
               {/* Seed input */}

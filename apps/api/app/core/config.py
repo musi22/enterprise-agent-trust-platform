@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
     # Commerce & Policy Constraints
+    ENABLE_FAULT_INJECTION: bool = os.getenv("ENABLE_FAULT_INJECTION", "false").lower() == "true"
     REFUND_APPROVAL_THRESHOLD_CENTS: int = 5000  # $50.00 triggers human-in-the-loop approval
     MAX_RECOVERY_RETRIES: int = 3
     CIRCUIT_BREAKER_FAILURE_THRESHOLD: int = 3

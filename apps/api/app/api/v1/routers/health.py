@@ -1,9 +1,17 @@
+﻿import os
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from apps.api.app.db.database import get_db
 
 router = APIRouter(tags=["Health"])
+
+def _get_provider_mode() -> str:
+    gemini_key = os.getenv("GEMINI_API_KEY", "")
+    provider = os.getenv("DEFAULT_MODEL_PROVIDER", "deterministic_mock").lower()
+    if provider in ("gemini", "google") and gemini_key:
+        return "LIVE: Gemini"
+    return "DEMO (Mock)"
 
 @router.get("/health/live")
 async def liveness_probe():
@@ -19,11 +27,13 @@ async def readiness_probe(session: AsyncSession = Depends(get_db)):
             "status": "ready",
             "service": "agentic-commerce-reliability-lab",
             "database": "connected",
-            "ready": True
+            "ready": True,
+            "provider_mode": _get_provider_mode(),
         }
     except Exception as e:
         return {
             "status": "unhealthy",
             "database": f"error: {str(e)}",
-            "ready": False
+            "ready": False,
+            "provider_mode": _get_provider_mode(),
         }
