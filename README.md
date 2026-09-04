@@ -33,9 +33,8 @@ Click **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)*
 
 > A full automated Playwright walkthrough executing all 6 features with live UI verification, graph trace exploration, HITL approval handling, and cryptographic tamper detection.
 
-- 🌐 **Watch Instantly in Browser (Recommended):** Open the **[Live Web Console](https://enterprise-ai-web-production.up.railway.app)** and click the **`▶ Watch Demo`** button in the header.
-- 🎬 **Universal MP4 Video (Plays in Windows Media Player / QuickTime / GitHub):** [`docs/videos/enterprise_features_demo.mp4`](docs/videos/enterprise_features_demo.mp4)
-- 🌐 **Offline Browser Player:** Double-click [`docs/watch_demo.html`](docs/watch_demo.html) to open the interactive player in Chrome or Edge.
+- 🎬 **Watch Walkthrough (MP4):** [`docs/videos/enterprise_features_demo.mp4`](docs/videos/enterprise_features_demo.mp4)
+- 🌐 **Interactive Local Player:** Double-click [`docs/watch_demo.html`](docs/watch_demo.html) to open the player in your browser.
 - 📹 **Raw WebM Format:** [`docs/videos/enterprise_features_demo.webm`](docs/videos/enterprise_features_demo.webm)
 - 📚 **Comprehensive Feature-by-Feature Guide:** [`docs/FEATURES.md`](docs/FEATURES.md)
 
